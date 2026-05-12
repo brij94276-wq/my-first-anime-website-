@@ -1,0 +1,1525 @@
+o<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ObiyAnsh — Anime Universe</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050508;--bg2:#0d0d14;--red:#cc1111;--crimson:#8b0000;
+  --neon:#ff3333;--neon2:#ff8888;--pink:#ff4488;
+  --text:#e8e8f0;--text2:#8888aa;--card:#0f0f1a;--border:#1a1a28;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;overflow-x:hidden;scroll-behavior:smooth;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
+
+/* ====== INTRO ====== */
+#intro{
+  position:fixed;inset:0;background:#000;z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.intro-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%, #2a000044 0%, #000 70%);
+}
+.intro-lines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 40px,#cc000011 40px,#cc000011 41px),
+             repeating-linear-gradient(90deg,transparent,transparent 60px,#cc000008 60px,#cc000008 61px);
+  animation:introLinesMove 8s linear infinite;
+}
+@keyframes introLinesMove{from{transform:translate(0,0);}to{transform:translate(60px,41px);}}
+
+/* Sharingan */
+.sharingan-wrap{
+  position:relative;z-index:2;
+  width:180px;height:180px;margin-bottom:30px;
+}
+.sharingan{
+  width:180px;height:180px;border-radius:50%;position:relative;
+  background:radial-gradient(circle at 50% 50%,#ff2222 0%,#990000 35%,#440000 60%,#110000 80%,#000 100%);
+  box-shadow:0 0 40px #cc000066,0 0 80px #cc000033,0 0 160px #cc000011;
+  animation:sRing 3s linear infinite;
+}
+@keyframes sRing{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.sharingan::after{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:50px;height:50px;border-radius:50%;
+  background:#000;
+  box-shadow:0 0 0 6px #cc0000,0 0 0 10px #000,0 0 20px #cc0000;
+}
+.tomoe{
+  position:absolute;width:22px;height:22px;
+  top:50%;left:50%;
+  border-radius:50% 0 50% 50%;
+  background:#000;
+  transform-origin:0 0;
+}
+.tomoe:nth-child(1){transform:rotate(0deg) translate(-11px,-60px);}
+.tomoe:nth-child(2){transform:rotate(120deg) translate(-11px,-60px);}
+.tomoe:nth-child(3){transform:rotate(240deg) translate(-11px,-60px);}
+
+/* Fighters */
+.fighters-arena{
+  position:absolute;bottom:0;left:0;right:0;height:320px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 60px;overflow:hidden;
+}
+.fighter{
+  position:relative;width:90px;height:220px;
+  filter:drop-shadow(0 0 12px #cc000099);
+}
+.fighter svg{width:100%;height:100%;}
+.fighter-left{animation:fightL 4s ease-in-out infinite;}
+.fighter-right{animation:fightR 4s ease-in-out infinite;transform:scaleX(-1);}
+@keyframes fightL{
+  0%,100%{transform:translateX(-30px);}
+  20%{transform:translateX(80px) rotate(-5deg);}
+  25%{transform:translateX(60px) rotate(8deg);}
+  30%{transform:translateX(80px) rotate(-8deg);}
+  35%{transform:translateX(60px) rotate(5deg);}
+  60%{transform:translateX(-30px);}
+}
+@keyframes fightR{
+  0%,100%{transform:scaleX(-1) translateX(-30px);}
+  20%{transform:scaleX(-1) translateX(80px) rotate(-5deg);}
+  25%{transform:scaleX(-1) translateX(60px) rotate(8deg);}
+  30%{transform:scaleX(-1) translateX(80px) rotate(-8deg);}
+  35%{transform:scaleX(-1) translateX(60px) rotate(5deg);}
+  60%{transform:scaleX(-1) translateX(-30px);}
+}
+.clash-burst{
+  position:absolute;bottom:140px;left:50%;transform:translateX(-50%);
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#ffcc00 30%,#ff3300 60%,transparent 80%);
+  opacity:0;animation:clash 4s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes clash{
+  0%,100%{opacity:0;transform:translateX(-50%) scale(0.2);}
+  22%,28%{opacity:0;transform:translateX(-50%) scale(0.2);}
+  25%{opacity:1;transform:translateX(-50%) scale(1.5);}
+}
+
+/* Title */
+.intro-title-wrap{position:relative;z-index:5;text-align:center;}
+.intro-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(44px,9vw,96px);
+  font-weight:900;letter-spacing:0.08em;
+  background:linear-gradient(135deg,#ffffff 0%,#ff6666 40%,#ff2222 70%,#ffaaaa 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-transform:uppercase;
+  opacity:0;animation:titleIn 1s ease forwards;animation-delay:1s;
+  text-shadow:none;
+}
+.intro-sub{
+  font-family:'Rajdhani',sans-serif;font-size:14px;letter-spacing:0.4em;
+  color:#ff8888;text-transform:uppercase;
+  opacity:0;animation:fadeIn 0.8s ease forwards;animation-delay:1.8s;
+  margin-top:8px;
+}
+.intro-by{
+  font-size:12px;letter-spacing:0.2em;color:#664444;
+  opacity:0;animation:fadeIn 0.8s ease forwards;animation-delay:2.2s;
+  margin-top:4px;
+}
+@keyframes titleIn{
+  from{opacity:0;transform:translateY(24px) scale(0.85);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.intro-btn{
+  margin-top:28px;padding:12px 36px;
+  background:transparent;border:1.5px solid var(--neon);color:var(--neon);
+  font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:0.2em;
+  cursor:pointer;transition:all 0.3s;text-transform:uppercase;
+  opacity:0;animation:fadeIn 0.8s ease forwards;animation-delay:2.5s;
+}
+.intro-btn:hover{background:var(--neon);color:#000;}
+.intro-fade{animation:introOut 0.6s ease forwards!important;}
+@keyframes introOut{to{opacity:0;pointer-events:none;}}
+
+/* ====== MAIN APP ====== */
+#app{display:none;min-height:100vh;}
+
+/* Navbar */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,5,8,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;
+  letter-spacing:0.08em;cursor:pointer;
+  background:linear-gradient(135deg,#fff 0%,#ff5555 60%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo span{-webkit-text-fill-color:var(--neon);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{
+  color:var(--text2);text-decoration:none;font-family:'Orbitron',sans-serif;
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  cursor:pointer;transition:color 0.3s;padding-bottom:2px;
+  border-bottom:2px solid transparent;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--neon);border-bottom-color:var(--neon);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.icon-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text2);width:40px;height:40px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:17px;transition:all 0.3s;
+}
+.icon-btn:hover,.icon-btn.active{border-color:var(--neon);color:var(--neon);box-shadow:0 0 10px #ff333344;}
+.login-btn{
+  background:var(--red);border:none;color:white;
+  padding:10px 20px;border-radius:4px;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:0.08em;transition:all 0.3s;
+}
+.login-btn:hover{background:var(--neon);transform:translateY(-1px);}
+.user-info{display:none;align-items:center;gap:10px;cursor:pointer;}
+.user-avatar{
+  width:38px;height:38px;border-radius:50%;
+  border:2px solid var(--neon);overflow:hidden;background:var(--crimson);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:white;font-family:'Orbitron',sans-serif;
+}
+.user-avatar img{width:100%;height:100%;object-fit:cover;}
+.user-name{font-size:13px;font-weight:600;color:var(--text2);}
+
+/* Hero */
+.hero{
+  padding:80px 40px 60px;text-align:center;
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#0e0005 0%,#050508 100%);
+}
+.hero-glow{
+  position:absolute;top:-100px;left:50%;transform:translateX(-50%);
+  width:600px;height:400px;
+  background:radial-gradient(ellipse,#cc000022 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-eye{
+  position:absolute;top:20px;right:60px;
+  width:80px;height:80px;opacity:0.15;
+  animation:eyeFloat 4s ease-in-out infinite;
+}
+@keyframes eyeFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,11vw,110px);
+  letter-spacing:0.04em;line-height:0.85;
+  position:relative;z-index:1;
+}
+.hero h1 .red{color:var(--neon);}
+.hero-desc{
+  font-size:15px;color:var(--text2);margin-top:16px;
+  letter-spacing:0.12em;text-transform:uppercase;
+}
+.hero-stats{
+  display:flex;gap:48px;justify-content:center;
+  margin-top:40px;position:relative;z-index:1;
+}
+.stat{text-align:center;}
+.stat .num{
+  font-family:'Orbitron',sans-serif;font-size:26px;font-weight:900;color:var(--neon);
+  display:block;
+}
+.stat .lbl{font-size:11px;color:var(--text2);letter-spacing:0.2em;text-transform:uppercase;}
+.stat-div{width:1px;background:var(--border);align-self:stretch;}
+.search-wrap{max-width:560px;margin:36px auto 0;position:relative;}
+.search-wrap input{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:14px 52px 14px 20px;
+  color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;
+  outline:none;transition:border-color 0.3s;
+}
+.search-wrap input:focus{border-color:var(--neon);}
+.search-wrap input::placeholder{color:var(--text2);}
+.search-wrap button{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--neon);cursor:pointer;font-size:19px;
+}
+
+/* Particles */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.particle{
+  position:absolute;border-radius:50%;background:var(--neon);
+  animation:pFloat linear infinite;opacity:0;
+}
+@keyframes pFloat{
+  0%{transform:translateY(100%) translateX(var(--px));opacity:0;}
+  10%{opacity:0.5;}90%{opacity:0.2;}
+  100%{transform:translateY(-120%) translateX(var(--px2));opacity:0;}
+}
+
+/* Categories */
+.cats-wrap{padding:32px 40px 0;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.cat-pill{
+  padding:7px 18px;border:1px solid var(--border);background:transparent;
+  color:var(--text2);border-radius:100px;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;
+  letter-spacing:0.05em;transition:all 0.25s;white-space:nowrap;
+}
+.cat-pill:hover{border-color:var(--red);color:var(--text);}
+.cat-pill.active{background:var(--red);border-color:var(--red);color:#fff;}
+
+/* Grid */
+.grid-header{
+  padding:32px 40px 16px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.grid-header h2{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.04em;}
+.sort-sel{
+  background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:8px 14px;border-radius:4px;font-family:'Rajdhani',sans-serif;
+  font-size:13px;cursor:pointer;outline:none;
+}
+#wall-grid{padding:0 40px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.w-card{
+  background:var(--card);border-radius:8px;overflow:hidden;
+  border:1px solid var(--border);transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  cursor:pointer;
+}
+.w-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px #cc111133;border-color:var(--neon);}
+.w-card .thumb-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.w-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.w-card:hover img{transform:scale(1.06);}
+.qual-badge{
+  position:absolute;top:8px;right:8px;
+  background:var(--red);color:#fff;
+  font-family:'Orbitron',sans-serif;font-size:9px;
+  padding:3px 8px;border-radius:2px;letter-spacing:0.08em;
+}
+.res-badge{
+  position:absolute;top:8px;left:8px;
+  background:rgba(0,0,0,0.7);color:var(--text2);
+  font-family:'Rajdhani',sans-serif;font-size:10px;
+  padding:2px 8px;border-radius:2px;
+}
+.w-info{padding:10px 14px 6px;}
+.w-title{font-weight:700;font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.w-tag{font-size:11px;color:var(--text2);margin-top:2px;}
+.w-actions{display:flex;gap:8px;padding:8px 14px 12px;}
+.btn-like,.btn-dl{
+  flex:1;padding:7px 6px;border-radius:4px;border:1px solid var(--border);
+  background:transparent;color:var(--text2);cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  transition:all 0.25s;white-space:nowrap;
+}
+.btn-like:hover{border-color:var(--pink);color:var(--pink);}
+.btn-like.liked{background:#ff448822;border-color:var(--pink);color:var(--pink);}
+.btn-dl:hover{border-color:var(--neon);color:var(--neon);}
+
+/* Skeleton loader */
+.skel{background:linear-gradient(90deg,var(--card) 25%,#1a1a28 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:240px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* Load more */
+.load-more-wrap{text-align:center;padding:0 0 60px;}
+.load-more{
+  padding:13px 48px;background:transparent;
+  border:1.5px solid var(--neon);color:var(--neon);
+  font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:0.15em;
+  cursor:pointer;transition:all 0.3s;text-transform:uppercase;
+}
+.load-more:hover{background:var(--neon);color:#000;}
+.load-more:disabled{opacity:0.4;cursor:not-allowed;}
+
+/* Liked Section */
+#liked-section{display:none;padding:40px;}
+.liked-header{
+  display:flex;align-items:center;gap:16px;margin-bottom:32px;
+}
+.liked-header h2{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--pink);}
+.liked-count{
+  background:#ff448822;border:1px solid var(--pink);color:var(--pink);
+  font-family:'Orbitron',sans-serif;font-size:13px;
+  padding:4px 14px;border-radius:100px;
+}
+.liked-empty{
+  text-align:center;padding:80px 40px;color:var(--text2);
+}
+.liked-empty .big{font-size:64px;margin-bottom:16px;}
+.liked-empty h3{font-family:'Orbitron',sans-serif;font-size:18px;color:var(--text);margin-bottom:8px;}
+
+/* Stickers Section */
+#stickers-section{display:none;padding:40px;}
+#stickers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;}
+.sticker-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;cursor:pointer;transition:all 0.3s;
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+}
+.sticker-card:hover{border-color:var(--neon);transform:scale(1.05);box-shadow:0 8px 24px #cc111133;}
+.sticker-card img{width:90%;height:90%;object-fit:contain;}
+
+/* Modal - Fullscreen viewer */
+#view-modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.95);z-index:2000;
+  align-items:center;justify-content:center;flex-direction:column;
+  padding:20px;
+}
+#view-modal.open{display:flex;}
+#view-modal img{
+  max-width:92vw;max-height:78vh;object-fit:contain;
+  border-radius:6px;box-shadow:0 0 60px #00000088;
+}
+.modal-btns{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;justify-content:center;}
+.modal-btns button{
+  padding:11px 28px;border-radius:4px;border:1px solid var(--border);
+  background:transparent;color:var(--text);font-family:'Rajdhani',sans-serif;
+  font-weight:700;cursor:pointer;transition:all 0.3s;font-size:14px;
+}
+.btn-modal-dl{border-color:var(--neon)!important;color:var(--neon)!important;}
+.btn-modal-dl:hover{background:var(--neon)!important;color:#000!important;}
+.btn-modal-like{border-color:var(--pink)!important;color:var(--pink)!important;}
+.btn-modal-like.liked{background:#ff448822!important;}
+.btn-modal-close:hover{border-color:#fff;color:#fff;}
+.modal-res{font-family:'Orbitron',sans-serif;font-size:10px;color:var(--text2);margin-top:8px;letter-spacing:0.1em;}
+
+/* Login Modal */
+#login-modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);z-index:3000;
+  align-items:center;justify-content:center;
+}
+#login-modal.open{display:flex;}
+.login-box{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:16px;padding:48px 40px;width:min(400px,90vw);text-align:center;
+  position:relative;
+  box-shadow:0 0 80px #cc111122;
+}
+.login-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:16px 16px 0 0;
+  background:linear-gradient(90deg,var(--red),var(--neon),var(--red));
+}
+.login-logo{
+  font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;
+  background:linear-gradient(135deg,#fff,var(--neon));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:6px;
+}
+.login-box p{color:var(--text2);font-size:14px;margin-bottom:32px;}
+.google-btn{
+  width:100%;background:#fff;color:#333;border:none;border-radius:6px;
+  padding:14px 24px;font-size:15px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  transition:all 0.3s;font-family:'Rajdhani',sans-serif;letter-spacing:0.02em;
+}
+.google-btn:hover{background:#f0f0f0;transform:translateY(-1px);box-shadow:0 4px 20px #ffffff22;}
+.google-icon{width:20px;height:20px;}
+.login-close{
+  position:absolute;top:14px;right:16px;background:none;border:none;
+  color:var(--text2);font-size:22px;cursor:pointer;transition:color 0.3s;
+}
+.login-close:hover{color:var(--text);}
+/* Name input */
+.name-step{display:none;flex-direction:column;gap:14px;}
+.name-step input{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:13px 16px;border-radius:6px;
+  font-family:'Rajdhani',sans-serif;font-size:15px;outline:none;
+  transition:border-color 0.3s;
+}
+.name-step input:focus{border-color:var(--neon);}
+.name-step button{
+  background:var(--red);border:none;color:#fff;padding:13px;
+  border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:15px;cursor:pointer;transition:all 0.3s;
+}
+.name-step button:hover{background:var(--neon);}
+
+/* Notification */
+#notif{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--card);border:1px solid var(--neon);color:var(--text);
+  padding:11px 22px;border-radius:4px;font-family:'Rajdhani',sans-serif;
+  font-size:14px;z-index:9000;opacity:0;transition:all 0.3s;
+  white-space:nowrap;pointer-events:none;
+}
+#notif.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Footer */
+footer{
+  border-top:1px solid var(--border);padding:40px;text-align:center;
+  background:var(--bg2);
+}
+.footer-logo{
+  font-family:'Orbitron',sans-serif;font-size:20px;font-weight:900;
+  background:linear-gradient(135deg,#fff,var(--neon));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+footer p{color:var(--text2);font-size:13px;letter-spacing:0.05em;}
+footer .obito-quote{
+  font-style:italic;color:#664444;font-size:14px;margin-top:12px;
+  max-width:500px;margin-left:auto;margin-right:auto;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  .hero{padding:50px 20px 40px;}
+  .hero-stats{gap:24px;}
+  .cats-wrap{padding:20px 16px 0;}
+  .grid-header{padding:20px 16px 12px;}
+  #wall-grid{padding:0 16px 40px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+  #liked-section,#stickers-section{padding:20px 16px;}
+  .fighters-arena{padding:0 20px;}
+  .fighter{width:65px;height:160px;}
+}
+</style>
+</head>
+<body>
+
+<!-- =================== INTRO =================== -->
+<div id="intro">
+  <div class="intro-bg"></div>
+  <div class="intro-lines"></div>
+  <div class="particles" id="intro-particles"></div>
+
+  <div class="sharingan-wrap">
+    <div class="sharingan">
+      <div class="tomoe"></div>
+      <div class="tomoe"></div>
+      <div class="tomoe"></div>
+    </div>
+  </div>
+
+  <div class="intro-title-wrap">
+    <div class="intro-title">ObiyAnsh</div>
+    <div class="intro-sub">⚡ Anime Universe ⚡</div>
+    <div class="intro-by">by Divyansh — Powered by Obito's Kamui</div>
+    <button class="intro-btn" onclick="enterSite()">Enter the Verse ➜</button>
+  </div>
+
+  <div class="fighters-arena">
+    <!-- Left Fighter (Obito - Akatsuki) -->
+    <div class="fighter fighter-left">
+      <svg viewBox="0 0 90 220" xmlns="http://www.w3.org/2000/svg" fill="#cc0000">
+        <!-- Head -->
+        <ellipse cx="45" cy="22" rx="16" ry="18"/>
+        <!-- Mask covering right side -->
+        <ellipse cx="53" cy="23" rx="10" ry="11" fill="#660000"/>
+        <!-- Sharingan eye -->
+        <circle cx="53" cy="22" r="5" fill="#000"/>
+        <circle cx="53" cy="22" r="2" fill="#ff0000"/>
+        <!-- Neck -->
+        <rect x="40" y="38" width="10" height="10" rx="3"/>
+        <!-- Akatsuki cloak body -->
+        <path d="M 22 48 L 18 145 L 40 145 L 45 100 L 50 145 L 72 145 L 68 48 Z" opacity="0.9"/>
+        <!-- Cloak collar -->
+        <path d="M 22 48 L 45 75 L 68 48 Z" fill="#550000"/>
+        <!-- Cloud on cloak (white) -->
+        <ellipse cx="45" cy="95" rx="10" ry="5" fill="#ffffff22"/>
+        <!-- Extended attack arm (right) - Kamui hand -->
+        <rect x="66" y="58" width="45" height="9" rx="4.5" transform="rotate(-18,66,62)"/>
+        <!-- Spiral on hand -->
+        <circle cx="106" cy="48" r="8" fill="#ff666644" stroke="#ff0000" stroke-width="1.5"/>
+        <!-- Back arm (left) -->
+        <rect x="-10" y="60" width="35" height="8" rx="4" fill="#aa0000" transform="rotate(20,-10,64)"/>
+        <!-- Cloak flowing bottom left -->
+        <path d="M 18 120 L 5 200 L 28 180 Z" fill="#440000"/>
+        <!-- Cloak flowing bottom right -->
+        <path d="M 72 120 L 85 200 L 62 180 Z" fill="#440000"/>
+        <!-- Legs -->
+        <rect x="36" y="143" width="12" height="55" rx="5" transform="rotate(-10,42,143)"/>
+        <rect x="50" y="143" width="12" height="52" rx="5" transform="rotate(18,56,143)"/>
+        <!-- Boots -->
+        <rect x="29" y="190" width="16" height="12" rx="3" fill="#330000" transform="rotate(-10,37,196)"/>
+        <rect x="55" y="190" width="16" height="12" rx="3" fill="#330000" transform="rotate(18,63,196)"/>
+      </svg>
+    </div>
+
+    <!-- Clash Burst -->
+    <div class="clash-burst"></div>
+
+    <!-- Right Fighter (Naruto/rival) -->
+    <div class="fighter fighter-right">
+      <svg viewBox="0 0 90 220" xmlns="http://www.w3.org/2000/svg" fill="#cc2200">
+        <!-- Head -->
+        <ellipse cx="45" cy="22" rx="15" ry="17"/>
+        <!-- Headband -->
+        <rect x="29" y="14" width="32" height="7" rx="2" fill="#ffdd00" opacity="0.9"/>
+        <rect x="39" y="12" width="12" height="11" rx="1" fill="#999" opacity="0.8"/>
+        <!-- Eyes (Naruto whisker marks) -->
+        <circle cx="38" cy="22" r="3.5" fill="#000"/>
+        <circle cx="52" cy="22" r="3.5" fill="#000"/>
+        <!-- Neck -->
+        <rect x="40" y="37" width="10" height="10" rx="3"/>
+        <!-- Body (jacket) -->
+        <path d="M 24 47 L 20 130 L 42 130 L 45 90 L 48 130 L 70 130 L 66 47 Z"/>
+        <!-- Front arm - punch pose -->
+        <rect x="66" y="52" width="48" height="9" rx="4.5" transform="rotate(-10,66,56)"/>
+        <!-- Fist -->
+        <rect x="108" y="44" width="14" height="14" rx="3" fill="#cc3300"/>
+        <!-- Rasengan glow -->
+        <circle cx="115" cy="51" r="10" fill="#ffaa0044" stroke="#ffcc00" stroke-width="1.5"/>
+        <!-- Back arm -->
+        <rect x="-8" y="56" width="36" height="8" rx="4" fill="#aa1100" transform="rotate(15,-8,60)"/>
+        <!-- Pants -->
+        <rect x="25" y="129" width="18" height="55" rx="5" transform="rotate(-8,34,129)"/>
+        <rect x="47" y="129" width="18" height="52" rx="5" transform="rotate(12,56,129)"/>
+        <!-- Sandals -->
+        <rect x="20" y="178" width="20" height="11" rx="3" fill="#553300" transform="rotate(-8,30,183)"/>
+        <rect x="50" y="177" width="20" height="11" rx="3" fill="#553300" transform="rotate(12,60,182)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- =================== NOTIFICATION =================== -->
+<div id="notif"></div>
+
+<!-- =================== MAIN APP =================== -->
+<div id="app">
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo" onclick="showSection('home')">Obiy<span>Ansh</span></div>
+    <ul class="nav-links">
+      <li><a id="nav-home" class="active" onclick="showSection('home')">Home</a></li>
+      <li><a id="nav-liked" onclick="showSection('liked')">❤ Liked</a></li>
+      <li><a id="nav-stickers" onclick="showSection('stickers')">✦ Stickers</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="icon-btn" id="music-btn" title="Toggle Music" onclick="toggleMusic()">🎵</button>
+      <button class="login-btn" id="login-btn" onclick="showLoginModal()">Sign In</button>
+      <div class="user-info" id="user-info" onclick="logout()">
+        <div class="user-avatar" id="user-avatar">D</div>
+        <span class="user-name" id="user-name-nav">Divyansh</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME SECTION -->
+  <div id="home-section">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <div class="particles" id="hero-particles"></div>
+      <!-- Floating Sharingan Eye decoration -->
+      <div class="hero-eye">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="38" fill="#cc0000" opacity="0.6"/>
+          <circle cx="40" cy="40" r="16" fill="#000"/>
+          <circle cx="40" cy="40" r="6" fill="#cc0000"/>
+          <ellipse cx="40" cy="16" rx="7" ry="9" fill="#000" transform="rotate(0,40,40)"/>
+          <ellipse cx="40" cy="16" rx="7" ry="9" fill="#000" transform="rotate(120,40,40)"/>
+          <ellipse cx="40" cy="16" rx="7" ry="9" fill="#000" transform="rotate(240,40,40)"/>
+        </svg>
+      </div>
+      <h1><span class="red">Obiy</span>Ansh<br><span style="font-size:0.5em;color:var(--text2);">ANIME UNIVERSE</span></h1>
+      <p>Real Anime | HD Wallpapers | Download Now</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="num" id="stat-count">20+</span><span class="lbl">Anime</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="num">4K</span><span class="lbl">Quality</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="num">HD</span><span class="lbl">Ready</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="num">FREE</span><span class="lbl">Forever</span></div>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Search anime..." onkeydown="if(event.key==='Enter')searchWalls()">
+        <button onclick="searchWalls()">🔍</button>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="cats-wrap" id="cats-wrap">
+      <button class="cat-pill active" onclick="selectCat(this,'')">All Anime</button>
+      <button class="cat-pill" onclick="selectCat(this,'naruto')">🍥 Naruto</button>
+      <button class="cat-pill" onclick="selectCat(this,'demon+slayer')">🔥 Demon Slayer</button>
+      <button class="cat-pill" onclick="selectCat(this,'attack+on+titan')">⚔ AoT</button>
+      <button class="cat-pill" onclick="selectCat(this,'dragon+ball')">💥 Dragon Ball</button>
+      <button class="cat-pill" onclick="selectCat(this,'one+piece')">🏴‍☠️ One Piece</button>
+      <button class="cat-pill" onclick="selectCat(this,'jujutsu+kaisen')">🩸 JJK</button>
+      <button class="cat-pill" onclick="selectCat(this,'bleach')">🌙 Bleach</button>
+      <button class="cat-pill" onclick="selectCat(this,'death+note')">📓 Death Note</button>
+      <button class="cat-pill" onclick="selectCat(this,'hero+academia')">🦸 MHA</button>
+      <button class="cat-pill" onclick="selectCat(this,'sword+art')">⚡ SAO</button>
+      <button class="cat-pill" onclick="selectCat(this,'chainsaw+man')">🔗 Chainsaw</button>
+      <button class="cat-pill" onclick="selectCat(this,'spy+family')">🕵️ Spy x Family</button>
+    </div>
+
+    <!-- Grid Header -->
+    <div class="grid-header">
+      <h2 id="section-title">🔥 Trending Wallpapers</h2>
+      <select class="sort-sel" onchange="changeSorting(this.value)">
+        <option value="toplist">Top Rated</option>
+        <option value="hot">Hot Now</option>
+        <option value="date_added">Newest</option>
+        <option value="random">Random</option>
+        <option value="views">Most Viewed</option>
+      </select>
+    </div>
+
+    <!-- Wallpaper Grid -->
+    <div id="wall-grid"></div>
+
+    <!-- Load More -->
+    <div class="load-more-wrap">
+      <button class="load-more" id="load-more-btn" onclick="loadMore()">Load More Wallpapers</button>
+    </div>
+  </div>
+
+  <!-- LIKED SECTION -->
+  <div id="liked-section">
+    <div class="liked-header">
+      <h2>❤ Liked Wallpapers</h2>
+      <span class="liked-count" id="liked-count">0 saved</span>
+    </div>
+    <div id="liked-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;"></div>
+    <div class="liked-empty" id="liked-empty">
+      <div class="big">💔</div>
+      <h3>No Liked Wallpapers Yet</h3>
+      <p style="color:var(--text2)">Sign in and start liking wallpapers to save them here!</p>
+    </div>
+  </div>
+
+  <!-- STICKERS SECTION -->
+  <div id="stickers-section">
+    <div class="grid-header" style="padding:0 0 24px">
+      <h2>✦ Anime Stickers</h2>
+    </div>
+    <div id="stickers-grid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">ObiyAnsh</div>
+    <p>Premium Anime Wallpapers · Download Free · No Ads</p>
+    <div class="obito-quote">"Believe in yourself and all that you are." — Anime Spirit</div>
+    <p style="margin-top:16px;font-size:11px;color:#333344;">Made with ❤ by Divyansh · ObiyAnsh © 2025 · Production Ready</p>
+  </footer>
+</div>
+
+<!-- FULLSCREEN VIEW MODAL -->
+<div id="wall-modal">
+  <div class="modal-content">
+    <img id="modal-img" src="" alt="Wallpaper">
+    <div id="modal-info" class="modal-info"></div>
+    <div class="modal-res" id="modal-res"></div>
+    <div class="modal-btns">
+      <button class="btn-modal-dl" onclick="downloadCurrent()">⬇ Download</button>
+      <button class="btn-modal-like" id="modal-like-btn" onclick="toggleModalLike()">♡ Like</button>
+      <button class="btn-modal-close" onclick="closeModal()">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal">
+  <div class="login-box">
+    <button class="login-close" onclick="closeLoginModal()">✕</button>
+    <div class="login-logo">ObiyAnsh</div>
+    <p id="login-p">Sign in to like, save, and download wallpapers</p>
+    <!-- Step 1: Google button -->
+    <div id="google-step">
+      <button class="google-btn" onclick="googleSignInStep()">
+        <svg class="google-icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+    </div>
+    <!-- Step 2: Name input -->
+    <div class="name-step" id="name-step">
+      <p style="color:var(--text2);font-size:13px;margin:0">Enter your display name:</p>
+      <input type="text" id="name-input" placeholder="Your name..." value="Divyansh" onkeydown="if(event.key==='Enter')completeLogin()">
+      <button onclick="completeLogin()">🚀 Enter ObiyAnsh</button>
+    </div>
+  </div>
+</div>
+
+<script>
+console.log('Script started executing');
+
+// ==================== STATE ====================
+window.S = {
+  user: null,
+  liked: [],
+  walls: [],
+  currentWall: null,
+  page: 1,
+  sorting: 'toplist',
+  category: '',
+  loading: false,
+  musicOn: false,
+  audioCtx: null,
+  schedulerTimer: null,
+  beat: 0,
+  nextBeat: 0,
+  loadedIds: new Set(),
+};
+
+// ==================== MUSIC ====================
+function startMusic(){
+  if(S.audioCtx) return;
+  S.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  S.musicOn = true;
+  scheduleBeat();
+}
+
+function scheduleBeat(){
+  if(!S.musicOn) return;
+  const now = S.audioCtx.currentTime;
+  const bpm = 140;
+  const interval = 60 / bpm;
+  S.nextBeat = now + interval;
+  const osc = S.audioCtx.createOscillator();
+  const gain = S.audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(S.audioCtx.destination);
+  osc.frequency.setValueAtTime(440, now);
+  gain.gain.setValueAtTime(0.1, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+  osc.start(now);
+  osc.stop(now + 0.1);
+  S.schedulerTimer = setTimeout(scheduleBeat, interval * 1000);
+}
+
+function toggleMusic(){
+  S.musicOn = !S.musicOn;
+  const btn = document.getElementById('music-btn');
+  if(S.musicOn){
+    if(!S.audioCtx) startMusic();
+    btn.textContent = '🎵';
+  } else {
+    if(S.schedulerTimer) clearTimeout(S.schedulerTimer);
+    btn.textContent = '🔇';
+  }
+}
+
+// ==================== AUTH ====================
+function updateAuthUI(){
+  const userDiv = document.getElementById('user-info');
+  const loginBtn = document.getElementById('login-btn');
+  if(S.user){
+    userDiv.innerHTML = `
+      <div class="user-avatar">${S.user.name.charAt(0).toUpperCase()}</div>
+      <span>${S.user.name}</span>
+      <button onclick="signOut()">Sign Out</button>
+    `;
+    loginBtn.style.display = 'none';
+  } else {
+    userDiv.innerHTML = '';
+    loginBtn.style.display = 'block';
+  }
+}
+
+function showLoginModal(){
+  document.getElementById('login-modal').classList.add('show');
+}
+
+function closeLoginModal(){
+  document.getElementById('login-modal').classList.remove('show');
+}
+
+function googleSignInStep(){
+  document.getElementById('google-step').style.display = 'none';
+  document.getElementById('name-step').style.display = 'block';
+  document.getElementById('login-p').textContent = 'Almost there! Choose your display name:';
+}
+
+function completeLogin(){
+  const name = document.getElementById('name-input').value.trim();
+  if(!name) return;
+  S.user = {name: name, email: `${name.toLowerCase()}@animeuniverse.com`};
+  localStorage.setItem('animeUser', JSON.stringify(S.user));
+  closeLoginModal();
+  updateAuthUI();
+  showNotif(`Welcome to ObiyAnsh, ${name}!`);
+}
+
+function signOut(){
+  S.user = null;
+  localStorage.removeItem('animeUser');
+  updateAuthUI();
+  showNotif('Signed out successfully');
+}
+
+// ==================== INTRO ====================
+function initIntro(){
+  const intro = document.getElementById('intro');
+  const fighters = document.querySelector('.fighters-arena');
+  const btn = document.querySelector('.intro-btn');
+  
+  // Load saved user
+  const saved = localStorage.getItem('animeUser');
+  if(saved) S.user = JSON.parse(saved);
+  
+  // Load liked wallpapers
+  const liked = localStorage.getItem('likedWalls');
+  if(liked) S.liked = JSON.parse(liked);
+  
+  // Intro animation
+  setTimeout(() => {
+    fighters.style.opacity = '1';
+    fighters.style.transform = 'translateY(0)';
+  }, 500);
+  
+  setTimeout(() => {
+    btn.style.opacity = '1';
+    btn.style.transform = 'translateY(0)';
+  }, 1500);
+}
+
+// ==================== MODAL ====================
+function openModal(wall){
+  S.currentWall = wall;
+  const modal = document.getElementById('wall-modal');
+  const img = document.getElementById('modal-img');
+  const info = document.getElementById('modal-info');
+  
+  // Handle both API (path) and fallback (img) formats
+  const imgUrl = wall.path || wall.img;
+  const res = wall.dimension_x ? `${wall.dimension_x}x${wall.dimension_y}` : wall.res || 'Unknown';
+  const fav = wall.favorites || wall.fav || 0;
+  const tagStr = wall.tags ? (Array.isArray(wall.tags) ? wall.tags.map(t=>t.name).join(', ') : wall.tags) : 'Anime';
+  
+  img.src = imgUrl;
+  info.innerHTML = `
+    <h3>${tagStr}</h3>
+    <p>Resolution: ${res}</p>
+    <p>Favorites: ${fav}</p>
+    <div class="modal-actions">
+      <button onclick="likeWall()" class="${S.liked.includes(wall.id) ? 'liked' : ''}">❤️ Like</button>
+      <button onclick="downloadWall()">⬇️ Download</button>
+      <button onclick="shareWall()">📤 Share</button>
+    </div>
+  `;
+  
+  modal.classList.add('show');
+}
+
+function closeModal(){
+  document.getElementById('wall-modal').classList.remove('show');
+  S.currentWall = null;
+}
+
+function likeWall(){
+  if(!S.user) return showLoginModal();
+  const id = S.currentWall.id;
+  if(S.liked.includes(id)){
+    S.liked = S.liked.filter(x=>x!==id);
+    showNotif('Removed from liked wallpapers');
+  } else {
+    S.liked.push(id);
+    showNotif('Added to liked wallpapers');
+  }
+  localStorage.setItem('likedWalls', JSON.stringify(S.liked));
+  updateAuthUI();
+  document.querySelector('.modal-actions button:first-child').classList.toggle('liked');
+}
+
+function downloadWall(){
+  if(!S.user) return showLoginModal();
+  const imgUrl = S.currentWall.path || S.currentWall.img;
+  const link = document.createElement('a');
+  link.href = imgUrl;
+  link.download = `anime-wallpaper-${S.currentWall.id}.jpg`;
+  link.click();
+  showNotif('Download started!');
+}
+
+function shareWall(){
+  const imgUrl = S.currentWall.path || S.currentWall.img;
+  if(navigator.share){
+    navigator.share({
+      title: 'Anime Wallpaper',
+      text: 'Check out this awesome anime wallpaper!',
+      url: imgUrl
+    });
+  } else {
+    navigator.clipboard.writeText(imgUrl);
+    showNotif('Link copied to clipboard!');
+  }
+}
+
+// ==================== WALLPAPERS ====================
+function renderWalls(walls, append=false){
+  const g = document.getElementById('wall-grid');
+  if(!append) g.innerHTML = '';
+  
+  walls.forEach(wall => {
+    const card = document.createElement('div');
+    card.className = 'wallpaper-card';
+    card.onclick = () => openModal(wall);
+    
+    card.innerHTML = `
+      <img src="${wall.thumbs ? wall.thumbs.large : wall.thumb}" alt="Anime Wallpaper" loading="lazy">
+      <div class="wall-info">
+        <div class="wall-tags">${wall.tags ? wall.tags.slice(0,2).map(t=>t.name).join(', ') : 'Anime'}</div>
+        <div class="wall-stats">❤️ ${wall.favorites || 0}</div>
+      </div>
+    `;
+    
+    g.appendChild(card);
+  });
+}
+
+function showSkeletons(count){
+  const g = document.getElementById('wall-grid');
+  for(let i=0;i<count;i++){
+    const skel = document.createElement('div');
+    skel.className = 'wallpaper-card skeleton';
+    skel.innerHTML = '<div class="skel-img"></div><div class="skel-info"><div class="skel-text"></div><div class="skel-text short"></div></div>';
+    g.appendChild(skel);
+  }
+}
+
+function selectCat(cat){
+  S.category = cat;
+  S.page = 1;
+  S.loadedIds.clear(); // Clear loaded IDs when switching categories
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  if(cat){
+    document.querySelector(`[onclick="selectCat('${cat}')"]`).classList.add('active');
+  } else {
+    document.querySelector('.cat-pill:first-child').classList.add('active');
+  }
+  document.getElementById('section-title').textContent = cat ? `🔥 ${cat} Wallpapers` : '🔥 Trending Wallpapers';
+  loadWalls(true);
+}
+
+function searchWalls(){
+  const v=document.getElementById('search-input').value.trim();
+  if(!v) return;
+  S.category=v.replace(/\s+/g,'+');
+  S.page = 1;
+  S.loadedIds.clear(); // Clear loaded IDs when searching
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('section-title').textContent = `🔍 "${v}" Wallpapers`;
+  loadWalls(true);
+}
+
+function generateAnimeDB() {
+  console.log('generateAnimeDB called');
+  const animeList = [
+    'Naruto', 'Naruto Shippuden', 'Boruto Naruto Next Generations',
+    'One Piece', 'Dragon Ball', 'Dragon Ball Z', 'Dragon Ball Super',
+    'Bleach', 'Death Note', 'Jujutsu Kaisen',
+    'Attack on Titan', 'My Hero Academia', 'Demon Slayer',
+    'Sword Art Online', 'Re:Zero', 'Steins;Gate',
+    'Cowboy Bebop', 'Neon Genesis Evangelion', 'Mob Psycho 100',
+    'Vinland Saga', 'Classroom of the Elite', 'Spy x Family',
+    'Chainsaw Man', 'Fruits Basket', 'Tokyo Ghoul',
+    'Code Geass', 'Guilty Crown', 'The Promised Neverland',
+    'Ergo Proxy', 'Cyberpunk Edgerunners', 'Akira',
+    'Fullmetal Alchemist', 'Fullmetal Alchemist Brotherhood',
+    'Hunter x Hunter', 'Gintama', 'Black Clover',
+    'Fire Force', 'Blue Exorcist', 'Soul Eater',
+    'Fate/Zero', 'Fate/stay night', 'Fate/Unlimited Blade Works',
+    'High School DxD', 'Seraph of the End', 'The Irregular at Magic High School',
+    'Charlotte', 'Elfen Lied', 'Another',
+    'Puella Magi Madoka Magica', 'Kill la Kill', 'Darling in the Franxx',
+    'Your Name', 'A Silent Voice', 'Weathering With You',
+    'Makoto Shinkai', 'Studio Ghibli', 'Kyoto Animation',
+    'Trigun', 'Hellsing Ultimate', 'Black Lagoon',
+    'GTO', 'Great Teacher Onizuka', 'Slam Dunk',
+    'Haikyuu', 'Free!', 'My Teen Romantic Comedy SNAFU',
+    'Monogatari Series', 'Rascal Does Not Dream', 'A Place Further Than The Universe',
+    'K-On', 'Lucky Star', 'Nichijou',
+    'Dr. Stone', 'Haikyu', 'Kaguya-sama Love is War',
+    'Toilet-Bound Hanako-kun', 'Wonder Egg Priority', 'Toilet-Bound Hanako-kun',
+    'Skip and Loafer', 'Horimiya', 'Wotakoi',
+    'Anime Girl', 'Anime Boy', 'Romance Anime',
+    'Action Anime', 'Fantasy Anime', 'Sci-Fi Anime',
+    'Isekai', 'That Time I Got Reincarnated as a Slime', 'Sword Art Online Alternative',
+    'Overlord', 'Goblin Slayer', 'Rising of Shield Hero',
+    'Arifureta', 'Jobless Reincarnation', 'Log Horizon',
+    'Knights of Sidonia', 'Ghost in the Shell', 'Psycho-Pass',
+    'Parasyte', 'Tokyo Raven', 'Darker than Black',
+    'Union', 'Angels', 'Devils', 'Supernatural',
+    'Comedy Anime', 'Slice of Life', 'School Drama',
+    'Fantasy Adventure', 'Dark Fantasy', 'Light Fantasy',
+    'Baseball', 'Basketball', 'Fighting Sports',
+    'Music Anime', 'Art Anime', 'Gaming Anime',
+    'Detective Anime', 'Mystery Anime', 'Thriller Anime',
+    'Apocalypse Anime', 'Survival Anime', 'Adventure Anime',
+    'Historical Anime', 'Samurai Anime', 'War Anime',
+    'Slice of Heaven', 'Peaceful', 'Wholesome Anime'
+  ];
+
+  const db = [];
+  let id = 1;
+
+  // Create multiple wallpapers per anime for variety
+  animeList.forEach(anime => {
+    for (let i = 1; i <= 20; i++) { // 20 wallpapers per anime = 2000+ total
+      const variants = [
+        `${anime} wallpaper ${i}`,
+        `${anime} HD ${i}`,
+        `${anime} 4K ${i}`,
+        `${anime} character ${i}`,
+        `${anime} art ${i}`,
+        `${anime} poster ${i}`,
+        `${anime} fan art ${i}`,
+        `${anime} digital art ${i}`,
+      ];
+
+      variants.forEach((variant, idx) => {
+        // Use different Unsplash photo IDs for variety
+        const photoId = 1600000000000 + Math.floor(Math.random() * 600000000000);
+        const randomSeed = Math.floor(Math.random() * 999999);
+
+        db.push({
+          id: id++,
+          name: anime,
+          img: `https://images.unsplash.com/photo-${photoId}?w=1920&h=1080&fit=crop&q=80&sig=${randomSeed}`,
+          thumb: `https://images.unsplash.com/photo-${photoId}?w=400&h=225&fit=crop&q=80&sig=${randomSeed}`,
+          res: '1920x1080',
+          fav: Math.floor(Math.random() * 50000) + 100,
+          category: anime,
+          character: variant,
+        });
+      });
+    }
+  });
+
+  return db;
+}
+
+const ANIME_DB = generateAnimeDB();
+
+// API Functions
+async function fetchWalls(q, page, sort){
+  const query = q ? `${q}` : 'anime';
+  
+  // If we've gone too far, cycle back to random pages to get more variety
+  const maxPage = 50; // Wallhaven typically has limited pages per search
+  if(page > maxPage) {
+    page = Math.floor(Math.random() * maxPage) + 1;
+    console.log(`Reached max page, cycling to random page ${page}`);
+  }
+  
+  // Fetch 5 pages in parallel to get way more results
+  const pagePromises = [];
+  for(let p = page; p < page + 5; p++){
+    const actualPage = p > maxPage ? Math.floor(Math.random() * maxPage) + 1 : p;
+    const url = `https://wallhaven.cc/api/v1/search?q=${encodeURIComponent(query)}&categories=010&purity=100&sorting=${sort}&order=desc&page=${actualPage}&atleast=1920x1080`;
+    pagePromises.push(
+      fetch(url, {mode:'cors'})
+        .then(res => res.ok ? res.json() : {data: []})
+        .catch(err => {console.error('API Error:', err); return {data: []}})
+    );
+  }
+  
+  try {
+    const results = await Promise.all(pagePromises);
+    const allWalls = results.flatMap(r => r.data || []);
+    console.log(`Fetched ${allWalls.length} wallpapers for "${query}" from pages ${page}-${page+4}`);
+    return allWalls;
+  } catch(e) {
+    console.error('Fetch error:', e);
+    return [];
+  }
+}
+
+async function loadWalls(reset=false){
+  if(S.loading) return;
+  S.loading=true;
+  if(reset){ S.page=1; S.walls=[]; document.getElementById('wall-grid').innerHTML=''; }
+  showSkeletons(12);
+  let walls=[];
+  try {
+    walls = await fetchWalls(S.category, S.page, S.sorting);
+  } catch(e){
+    console.error('Error loading:', e);
+  }
+  document.getElementById('wall-grid').querySelectorAll('.skel').forEach(s=>s.remove());
+  if(walls.length>0){
+    const uniqueWalls = walls.filter(w => !S.loadedIds.has(w.id));
+    console.log(`After deduplication: ${uniqueWalls.length} unique walls out of ${walls.length} total`);
+    
+    if(uniqueWalls.length === 0) {
+      // All walls were duplicates, try again with different pages
+      console.log('All walls were duplicates, trying different pages');
+      S.page += 5; // Skip these pages
+      if(S.page < 100) { // Prevent infinite recursion
+        return loadWalls(false); // Try again recursively
+      } else {
+        // Give up and show no more message
+        const loadBtn = document.getElementById('load-more-btn');
+        loadBtn.textContent = 'No More Unique Wallpapers';
+        loadBtn.disabled = true;
+        loadBtn.style.opacity = '0.5';
+        loadBtn.style.cursor = 'not-allowed';
+        S.loading = false;
+        return;
+      }
+    }
+    
+    uniqueWalls.forEach(w => S.loadedIds.add(w.id));
+    S.walls = reset ? uniqueWalls : [...S.walls, ...uniqueWalls];
+    renderWalls(uniqueWalls, !reset);
+    S.page += 5;
+  } else {
+    console.log('No walls returned from API');
+    if(S.page === 1) {
+      // Fallback to local database if API fails on first load
+      console.log('Using fallback database');
+      const fallbackWalls = ANIME_DB.slice(0, 60).map(a => ({
+        id: a.id,
+        thumbs: { large: a.thumb },
+        path: a.img,
+        dimension_x: 3840,
+        dimension_y: 2160,
+        tags: [{ name: a.name }],
+        favorites: a.fav,
+      }));
+      S.walls = fallbackWalls;
+      renderWalls(fallbackWalls, false);
+      const g = document.getElementById('wall-grid');
+      g.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:20px 20px;color:var(--text2);font-size:14px;">⚠️ Using demo wallpapers (API temporarily unavailable)</p>' + g.innerHTML;
+    } else {
+      // For Load More, if no results, try with general "anime" search
+      if(S.category !== '') {
+        console.log('No results for specific category, trying general anime search');
+        S.category = ''; // Reset to general anime
+        document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+        document.querySelector('.cat-pill:first-child').classList.add('active');
+        document.getElementById('section-title').textContent = '🔥 Trending Wallpapers';
+        return loadWalls(false); // Try again with general search
+      } else {
+        // Show message when no more wallpapers available
+        const loadBtn = document.getElementById('load-more-btn');
+        loadBtn.textContent = 'No More Wallpapers Available';
+        loadBtn.disabled = true;
+        loadBtn.style.opacity = '0.5';
+        loadBtn.style.cursor = 'not-allowed';
+      }
+    }
+  }
+  S.loading=false;
+}
+function loadMore(){ loadWalls(false); }
+function changeSorting(val){ S.sorting=val; loadWalls(true); }
+
+// ==================== ENTER SITE ====================
+function enterSite(){
+  startMusic();
+  const intro = document.getElementById('intro');
+  intro.classList.add('intro-fade');
+  setTimeout(()=>{
+    intro.style.display='none';
+    const app = document.getElementById('app');
+    app.style.display='block';
+    updateAuthUI();
+    loadWalls(true);
+    initHeroParticles();
+  }, 600);
+}
+
+// ==================== PARTICLES ====================
+function initHeroParticles(){
+  const hp = document.getElementById('hero-particles');
+  for(let i=0;i<20;i++){
+    const p = document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;
+      --px:${(Math.random()-0.5)*80}px;--px2:${(Math.random()-0.5)*160}px;
+      animation-duration:${Math.random()*6+4}s;animation-delay:${Math.random()*5}s;`;    hp.appendChild(p);
+  }
+}
+
+// ==================== NOTIFICATION ====================
+let notifTimer=null;
+function showNotif(msg){
+  const n=document.getElementById('notif');
+  n.textContent=msg;
+  n.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer=setTimeout(()=>n.classList.remove('show'), 2800);
+}
+
+// ==================== INIT ====================
+initIntro();
+updateAuthUI();
+
+// API Functions
+async function fetchWalls(q, page, sort){
+  const query = q ? `${q}` : 'anime';
+  
+  // If we've gone too far, cycle back to random pages to get more variety
+  const maxPage = 50; // Wallhaven typically has limited pages per search
+  if(page > maxPage) {
+    page = Math.floor(Math.random() * maxPage) + 1;
+    console.log(`Reached max page, cycling to random page ${page}`);
+  }
+  
+  // Fetch 5 pages in parallel to get way more results
+  const pagePromises = [];
+  for(let p = page; p < page + 5; p++){
+    const actualPage = p > maxPage ? Math.floor(Math.random() * maxPage) + 1 : p;
+    const url = `https://wallhaven.cc/api/v1/search?q=${encodeURIComponent(query)}&categories=010&purity=100&sorting=${sort}&order=desc&page=${actualPage}&atleast=1920x1080`;
+    pagePromises.push(
+      fetch(url, {mode:'cors'})
+        .then(res => res.ok ? res.json() : {data: []})
+        .catch(err => {console.error('API Error:', err); return {data: []}})
+    );
+  }
+  
+  try {
+    const results = await Promise.all(pagePromises);
+    const allWalls = results.flatMap(r => r.data || []);
+    console.log(`Fetched ${allWalls.length} wallpapers for "${query}" from pages ${page}-${page+4}`);
+    return allWalls;
+  } catch(e) {
+    console.error('Fetch error:', e);
+    return [];
+  }
+}
+
+// ==================== LOAD WALLS ====================
+async function loadWalls(reset=false){
+  if(S.loading) return;
+  S.loading=true;
+  if(reset){ S.page=1; S.walls=[]; document.getElementById('wall-grid').innerHTML=''; }
+  showSkeletons(12);
+  let walls=[];
+  try {
+    walls = await fetchWalls(S.category, S.page, S.sorting);
+  } catch(e){
+    console.error('Error loading:', e);
+  }
+  document.getElementById('wall-grid').querySelectorAll('.skel').forEach(s=>s.remove());
+  if(walls.length>0){
+    const uniqueWalls = walls.filter(w => !S.loadedIds.has(w.id));
+    console.log(`After deduplication: ${uniqueWalls.length} unique walls out of ${walls.length} total`);
+    
+    if(uniqueWalls.length === 0) {
+      // All walls were duplicates, try again with different pages
+      console.log('All walls were duplicates, trying different pages');
+      S.page += 5; // Skip these pages
+      if(S.page < 100) { // Prevent infinite recursion
+        return loadWalls(false); // Try again recursively
+      } else {
+        // Give up and show no more message
+        const loadBtn = document.getElementById('load-more-btn');
+        loadBtn.textContent = 'No More Unique Wallpapers';
+        loadBtn.disabled = true;
+        loadBtn.style.opacity = '0.5';
+        loadBtn.style.cursor = 'not-allowed';
+        S.loading = false;
+        return;
+      }
+    }
+    
+    uniqueWalls.forEach(w => S.loadedIds.add(w.id));
+    S.walls = reset ? uniqueWalls : [...S.walls, ...uniqueWalls];
+    renderWalls(uniqueWalls, !reset);
+    S.page += 5;
+  } else {
+    console.log('No walls returned from API');
+    if(S.page === 1) {
+      // Fallback to local database if API fails on first load
+      console.log('Using fallback database');
+      const fallbackWalls = ANIME_DB.slice(0, 60).map(a => ({
+        id: a.id,
+        thumbs: { large: a.thumb },
+        path: a.img,
+        dimension_x: 3840,
+        dimension_y: 2160,
+        tags: [{ name: a.name }],
+        favorites: a.fav,
+      }));
+      S.walls = fallbackWalls;
+      renderWalls(fallbackWalls, false);
+      const g = document.getElementById('wall-grid');
+      g.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:20px 20px;color:var(--text2);font-size:14px;">⚠️ Using demo wallpapers (API temporarily unavailable)</p>' + g.innerHTML;
+    } else {
+      // For Load More, if no results, try with general "anime" search
+      if(S.category !== '') {
+        console.log('No results for specific category, trying general anime search');
+        S.category = ''; // Reset to general anime
+        document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+        document.querySelector('.cat-pill:first-child').classList.add('active');
+        document.getElementById('section-title').textContent = '🔥 Trending Wallpapers';
+        return loadWalls(false); // Try again with general search
+      } else {
+        // Show message when no more wallpapers available
+        const loadBtn = document.getElementById('load-more-btn');
+        loadBtn.textContent = 'No More Wallpapers Available';
+        loadBtn.disabled = true;
+        loadBtn.style.opacity = '0.5';
+        loadBtn.style.cursor = 'not-allowed';
+      }
+    }
+  }
+  S.loading=false;
+}
+function loadMore(){ loadWalls(false); }
+function changeSorting(val){ S.sorting=val; loadWalls(true); }
+function searchWalls(){
+  const v=document.getElementById('search-input').value.trim();
+  if(!v) return;
+  S.category=v.replace(/\s+/g,'+');
+  S.loadedIds.clear(); // Clear loaded IDs when searching
+  document.getElementById('section-title').textContent='🔍 Results: '+v;
+  // Deactivate cat pills
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  loadWalls(true);
+}
+function selectCat(el, cat){
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  S.category=cat;
+  S.loadedIds.clear(); // Clear loaded IDs when switching categories
+  const lbl = cat ? el.textContent.replace(/[^\w\s]/gi,'').trim() : 'All Anime';
+  document.getElementById('section-title').textContent = cat ? `⚡ ${lbl} Wallpapers` : '🔥 Trending Wallpapers';
+  loadWalls(true);
+}
+function showSkeletons(n){
+  const g=document.getElementById('wall-grid');
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div'); d.className='skel'; g.appendChild(d);
+  }
+}
+
+// ==================== RENDER WALLS ====================
+const wallMap = {};
+
+function capitalize(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+
+// ==================== MODAL ====================
+
+// ==================== DOWNLOAD ====================
+async function downloadWall(url, filename){
+  showNotif('⬇ Downloading...');
+  try {
+    const res = await fetch(url, {mode:'cors'});
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename||'anime-wallpaper.jpg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+    showNotif('✅ Download started! Enjoy!');
+  } catch(e){
+    window.open(url, '_blank');
+    showNotif('🔗 Opening download in new tab');
+  }
+}
+
+// ==================== LIKED SECTION ====================
+function renderLiked(){
+  const grid = document.getElementById('liked-grid');
+  const empty = document.getElementById('liked-empty');
+  const count = document.getElementById('liked-count');
+  grid.innerHTML='';
+  count.textContent=S.liked.length+' saved';
+  const likedWalls = S.liked.map(id=>wallMap[id]).filter(Boolean);
+  if(likedWalls.length===0){
+    empty.style.display='block';
+    grid.style.display='none';
+    return;
+  }
+  empty.style.display='none';
+  grid.style.display='grid';
+  grid.innerHTML='';
+  likedWalls.forEach(w=>{
+    const tag = w.tags && w.tags[0] ? w.tags[0].name : 'anime';
+    const res = w.dimension_x ? `${w.dimension_x}×${w.dimension_y}` : 'HD';
+    const card=document.createElement('div'); 
+    card.className='w-card';
+    card.innerHTML=`
+      <div class="thumb-wrap" onclick="openModal('${w.id}')">
+        <img src="${w.thumbs.large}" alt="${tag}" loading="lazy">
+        <span class="qual-badge">HD</span>
+        <span class="res-badge">${res}</span>
+      </div>
+      <div class="w-info">
+        <div class="w-title">${capitalize(tag)}</div>
+        <div class="w-tag">❤ Saved</div>
+      </div>
+      <div class="w-actions">
+        <button class="btn-like liked" onclick="toggleLike('${w.id}');renderLiked()">❤ Unlike</button>
+        <button class="btn-dl" onclick="downloadWall('${w.path||w.thumbs.large}','${tag}-wallpaper.jpg')">⬇ Download</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ==================== STICKERS ====================
+async function loadStickers(){
+  const grid = document.getElementById('stickers-grid');
+  grid.innerHTML='';
+  
+  // Show all anime as stickers
+  const stickers = ANIME_DB.slice(0, 20);
+  
+  stickers.forEach(s=>{
+    const c=document.createElement('div'); 
+    c.className='sticker-card';
+    c.onclick=()=> {
+      // Create temp wall object
+      const wall = {
+        id: 'sticker_' + s.id,
+        thumbs: { large: s.thumb },
+        path: s.img,
+        dimension_x: 3840,
+        dimension_y: 2160,
+        tags: [{ name: s.name }],
+        favorites: s.fav,
+      };
+      wallMap[wall.id] = wall;
+      openModal(wall.id);
+    };
+    c.innerHTML=`<img src="${s.thumb}" alt="${s.name}" loading="lazy" style="border-radius:8px;">`;
+    grid.appendChild(c);
+  });
+}
+
+// ==================== SECTIONS ====================
+function showSection(name){
+  const sections=['home-section','liked-section','stickers-section'];
+  const navIds=['nav-home','nav-liked','nav-stickers'];
+  sections.forEach((s,i)=>{
+    document.getElementById(s).style.display='none';
+    document.getElementById(navIds[i]).classList.remove('active');
+  });
+  if(name==='home'){
+    document.getElementById('home-section').style.display='block';
+    document.getElementById('nav-home').classList.add('active');
+    if(S.walls.length===0) loadWalls(true);
+  } else if(name==='liked'){
+    document.getElementById('liked-section').style.display='block';
+    document.getElementById('nav-liked').classList.add('active');
+    renderLiked();
+  } else if(name==='stickers'){
+    document.getElementById('stickers-section').style.display='block';
+    document.getElementById('nav-stickers').classList.add('active');
+    if(document.getElementById('stickers-grid').children.length===0) loadStickers();
+  }
+}
+// Keyboard shortcut
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') { closeModal(); closeLoginModal(); }
+});
+
+</script>
+</body>
+</html>

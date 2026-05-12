@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ObiyAnsh — Anime Universe</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .wallpaper-card { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; }
+        button { padding: 10px 20px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>ObiyAnsh Anime Universe</h1>
+    <div id="intro">
+        <h2>Welcome to Anime Universe</h2>
+        <button onclick="enterSite()">Enter the Verse ➜</button>
+    </div>
+    
+    <div id="main-app" style="display: none;">
+        <h2>🔥 Trending Wallpapers</h2>
+        <div id="wall-grid"></div>
+        <button onclick="loadMore()">Load More Wallpapers</button>
+    </div>
+
+    <script>
+        console.log('Script started executing');
+
+        // ==================== STATE ====================
+        window.S = {
+            user: null,
+            liked: [],
+            walls: [],
+            currentWall: null,
+            page: 1,
+            sorting: 'toplist',
+            category: '',
+            loading: false,
+            loadedIds: new Set(),
+        };
+
+        console.log('S object created:', window.S);
+
+        // ==================== FUNCTIONS ====================
+        function enterSite() {
+            console.log('Entering site');
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            loadWalls(true);
+        }
+
+        function loadWalls(reset) {
+            console.log('Loading walls, reset:', reset);
+            window.S.loading = true;
+            if (reset) {
+                window.S.page = 1;
+                window.S.walls = [];
+            }
+            
+            // Simple test implementation
+            setTimeout(() => {
+                const grid = document.getElementById('wall-grid');
+                if (grid) {
+                    const card = document.createElement('div');
+                    card.className = 'wallpaper-card';
+                    card.innerHTML = `
+                        <h3>Test Anime Wallpaper</h3>
+                        <img src="https://via.placeholder.com/400x225/333/fff?text=Anime+Wallpaper" alt="Test" style="width: 400px; height: 225px;">
+                        <p>⭐ 100 likes</p>
+                        <button>♡ Like</button>
+                        <button>⬇ Download</button>
+                    `;
+                    grid.appendChild(card);
+                }
+                window.S.loading = false;
+                console.log('Walls loaded');
+            }, 1000);
+        }
+
+        function loadMore() {
+            loadWalls(false);
+        }
+
+        console.log('Script initialization complete');
+    </script>
+</body>
+</html>
