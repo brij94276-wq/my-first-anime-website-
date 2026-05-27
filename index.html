@@ -968,7 +968,7 @@ function renderWalls(walls, append=false){
     const imgSrc = wall.thumbs?.large || wall.thumb || 'https://picsum.photos/400/225?grayscale';
     
     card.innerHTML = `
-      <img src="${imgSrc}" alt="Anime Wallpaper" loading="lazy" onerror="this.onerror=null;this.src='https://source.unsplash.com/400x225/?anime&sig=1';">
+      <img src="${imgSrc}" alt="Anime Wallpaper" loading="lazy" onerror="this.onerror=null;this.src='https://source.unsplash.com/400x225/?anime';">
       <div class="wall-info">
         <div class="wall-tags">${wall.tags ? wall.tags.slice(0,2).map(t=>t.name).join(', ') : 'Anime'}</div>
         <div class="wall-stats">❤️ ${wall.favorites || 0}</div>
@@ -1084,8 +1084,8 @@ function generateAnimeDB() {
         db.push({
           id: id++,
           name: anime,
-          img: `https://source.unsplash.com/1920x1080/?anime,${encodeURIComponent(anime)}&sig=${photoId}`,
-          thumb: `https://source.unsplash.com/400x225/?anime,${encodeURIComponent(anime)}&sig=${photoId}`,
+          img: `https://source.unsplash.com/1920x1080/?anime+${encodeURIComponent(anime)}&sig=${photoId}`,
+          thumb: `https://source.unsplash.com/400x225/?anime+${encodeURIComponent(anime)}&sig=${photoId}`,
           res: '1920x1080',
           fav: Math.floor(Math.random() * 50000) + 100,
           category: anime,
