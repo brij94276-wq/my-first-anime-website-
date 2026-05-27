@@ -1,0 +1,12 @@
+{
+  "name": "anime-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "deploy:login": "netlify login",
+    "deploy": "netlify deploy --prod --dir . --site $NETLIFY_SITE_ID"
+  },
+  "devDependencies": {
+    "netlify-cli": "^18.0.0"
+  }
+}
