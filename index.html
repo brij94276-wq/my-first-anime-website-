@@ -967,7 +967,7 @@ function renderWalls(walls, append=false){
     card.onclick = () => openModal(wall);
     
     card.innerHTML = `
-      <img src="${wall.thumbs ? wall.thumbs.large : wall.thumb}" alt="Anime Wallpaper" loading="lazy">
+      <img src="${wall.thumbs ? wall.thumbs.large : wall.thumb}" alt="Anime Wallpaper" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/400/225?grayscale';">
       <div class="wall-info">
         <div class="wall-tags">${wall.tags ? wall.tags.slice(0,2).map(t=>t.name).join(', ') : 'Anime'}</div>
         <div class="wall-stats">❤️ ${wall.favorites || 0}</div>
@@ -1086,8 +1086,8 @@ function generateAnimeDB() {
         db.push({
           id: id++,
           name: anime,
-          img: `https://images.unsplash.com/photo-${photoId}?w=1920&h=1080&fit=crop&q=80&sig=${randomSeed}`,
-          thumb: `https://images.unsplash.com/photo-${photoId}?w=400&h=225&fit=crop&q=80&sig=${randomSeed}`,
+          img: `https://picsum.photos/seed/${encodeURIComponent(anime + '-' + i + '-' + idx)}/1920/1080`,
+          thumb: `https://picsum.photos/seed/${encodeURIComponent(anime + '-' + i + '-' + idx)}/400/225`,
           res: '1920x1080',
           fav: Math.floor(Math.random() * 50000) + 100,
           category: anime,
@@ -1147,7 +1147,7 @@ async function loadWalls(reset=false){
   } catch(e){
     console.error('Error loading:', e);
   }
-  document.getElementById('wall-grid').querySelectorAll('.skel').forEach(s=>s.remove());
+  document.getElementById('wall-grid').querySelectorAll('.skeleton').forEach(s=>s.remove());
   if(walls.length>0){
     const uniqueWalls = walls.filter(w => !S.loadedIds.has(w.id));
     console.log(`After deduplication: ${uniqueWalls.length} unique walls out of ${walls.length} total`);
@@ -1303,7 +1303,7 @@ async function loadWalls(reset=false){
   } catch(e){
     console.error('Error loading:', e);
   }
-  document.getElementById('wall-grid').querySelectorAll('.skel').forEach(s=>s.remove());
+  document.getElementById('wall-grid').querySelectorAll('.skeleton').forEach(s=>s.remove());
   if(walls.length>0){
     const uniqueWalls = walls.filter(w => !S.loadedIds.has(w.id));
     console.log(`After deduplication: ${uniqueWalls.length} unique walls out of ${walls.length} total`);
