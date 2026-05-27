@@ -39,6 +39,26 @@ npm install
 
 - GitHub Pages: create a GitHub repo, push, then enable Pages from the repo settings (choose root branch).
 
+This repository includes GitHub Actions workflows to automate publishing:
+
+- `deploy-pages.yml` — automatically uploads the repository root as a Pages site when you push to `main`.
+- `deploy-netlify.yml` — optional Netlify deploy on push to `main` if you add `NETLIFY_AUTH_TOKEN` and `NETLIFY_SITE_ID` as repository secrets.
+
+To publish from your machine (example commands):
+
+```bash
+# 1) Create a GitHub repo (on github.com) and copy its URL, or create via `gh repo create`.
+git remote add origin <YOUR_REPO_URL>
+git branch -M main
+git push -u origin main
+
+# 2) (Optional) Add Netlify secrets in the GitHub repo settings if you want Netlify deploys:
+#    - NETLIFY_AUTH_TOKEN (create a personal token in Netlify)
+#    - NETLIFY_SITE_ID (your site's id)
+
+# After pushing, GitHub Actions will run and publish to GitHub Pages automatically.
+``` 
+
 ## Automated deploy via CI
 
 If you prefer continuous deploys, connect the GitHub repo to Netlify and it will auto-deploy on push.
