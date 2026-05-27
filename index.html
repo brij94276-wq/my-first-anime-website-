@@ -965,9 +965,10 @@ function renderWalls(walls, append=false){
     const card = document.createElement('div');
     card.className = 'wallpaper-card';
     card.onclick = () => openModal(wall);
+    const imgSrc = wall.thumbs?.large || wall.thumb || 'https://picsum.photos/400/225?grayscale';
     
     card.innerHTML = `
-      <img src="${wall.thumbs ? wall.thumbs.large : wall.thumb}" alt="Anime Wallpaper" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/400/225?grayscale';">
+      <img src="${imgSrc}" alt="Anime Wallpaper" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/400/225?grayscale';">
       <div class="wall-info">
         <div class="wall-tags">${wall.tags ? wall.tags.slice(0,2).map(t=>t.name).join(', ') : 'Anime'}</div>
         <div class="wall-stats">❤️ ${wall.favorites || 0}</div>
@@ -1079,15 +1080,12 @@ function generateAnimeDB() {
       ];
 
       variants.forEach((variant, idx) => {
-        // Use different Unsplash photo IDs for variety
-        const photoId = 1600000000000 + Math.floor(Math.random() * 600000000000);
-        const randomSeed = Math.floor(Math.random() * 999999);
-
+        const photoId = 100 + ((i * 20 + idx) % 1000);
         db.push({
           id: id++,
           name: anime,
-          img: `https://picsum.photos/seed/${encodeURIComponent(anime + '-' + i + '-' + idx)}/1920/1080`,
-          thumb: `https://picsum.photos/seed/${encodeURIComponent(anime + '-' + i + '-' + idx)}/400/225`,
+          img: `https://picsum.photos/id/${photoId}/1920/1080`,
+          thumb: `https://picsum.photos/id/${photoId}/400/225`,
           res: '1920x1080',
           fav: Math.floor(Math.random() * 50000) + 100,
           category: anime,
